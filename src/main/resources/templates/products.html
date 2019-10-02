@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Каталог товаров</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="~{navigation::navigation(Shop)}" />
+
+    <h1 th:text="Фильтры" />
+
+    <form th:action="@{/products}" method="GET">
+        <input th:value="${param.word != null} ? ${param.word}" th:name="word" type="text" placeholder="Название">
+        <input th:value="${param.min != null} ? ${param.min}" th:name="min" type="text" placeholder="Минимальная цена">
+        <input th:value="${param.max != null} ? ${param.max}" th:name="max" type="text" placeholder="Максимальная цена">
+        <!--<input th:value="${pageSize != null} ?${pageSize}" th:name="pageSize" placeholder="Кол-во товаров на странице">-->
+        <button type="submit" class="btn btn-primary">Фильтровать</button>
+    </form>
+
+    <br>
+
+    <h3>Каталог товаров</h3>
+
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Название</th>
+            <th>Цена</th>
+            <th></th>
+        </tr>
+        <tbody>
+        <tr th:each="product : ${page.getContent()}">
+            <td th:text="${product.id}"/>
+            <td th:text="${product.title}"/>
+            <td th:text="${product.cost}"/>
+            <td>
+                <!--<a th:href="@{'/products/delete/' + ${product.id}}" class="btn btn-danger">Delete</a>-->
+                <a th:href="@{'/products/edit?id=' + ${product.id}}">Edit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>
+        <a class="btn btn-success" th:href="@{'/products/edit'}">Add new product</a>
+    </p>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination" >
+            <!--active - подсветит значок текущей страницы-->
+            <!--вместо if которое скрывает используем classappend-->
+            <li class="page-item" th:classappend="${!(page.getNumber() > 0) ? 'disabled' : ''}">
+                <a th:class="page-link" th:href="@{'/products?pageNumber=' + ${page.getNumber()} + ${filters}}">Previous</a>
+            </li>
+
+            <li class="page-item" th:classappend="${page.getNumber()+1 == i ? 'active' : ''}" th:each="i : ${#numbers.sequence(1, page.getTotalPages())}">
+                <a th:class="page-link" th:text="${i}" th:href="@{'/products?pageNumber=' + ${i} + ${filters}}"></a>
+            </li>
+
+            <li class="page-item" th:classappend="${!(page.getNumber() < page.getTotalPages()-1) ? 'disabled' : ''}">
+                <a th:class="page-link" th:href="@{'/products?pageNumber=' + ${page.getNumber()+2} + ${filters}}">Next</a>
+            </li>
+
+
+            <!--мое исполнение-->
+            <!--<li class="page-item"><a class="page-link" th:href="@{/products/showAllByPage/1}" methods="get" name="page">1</a></li>-->
+            <!--<li class="page-item"><a class="page-link" th:href="@{/products/showAllByPage/2}" methods="get" name="page">2</a></li>-->
+            <!--<li class="page-item"><a class="page-link" th:href="@{/products/showAllByPage/3}" methods="get" name="page">3</a></li>-->
+        </ul>
+    </nav>
+
+    <!--<form th:action="@{/products/result_form}" method="get" id="sort">-->
+        <!--<select name="sortSelect" size="2" multiple form="sort">-->
+            <!--<option>По убыванию цены </option>-->
+            <!--<option>По возрастанию цены</option>-->
+        <!--</select>-->
+        <!--<button type="submit" class="btn btn-primary">Отфильтровать</button>-->
+    <!--</form>-->
+
+
+    <!--<form th:action="@{/products/submit_form}" method="get" id="find">-->
+        <!--<select name="findSelector" size="2" multiple form="find">-->
+            <!--<option>Минимальная цена</option>-->
+            <!--<option>Максимальная цена</option>-->
+        <!--</select>-->
+        <!--<button type="submit" class="btn btn-primary">Найти</button>-->
+    <!--</form>-->
+
+    <!--<form th:action="@{/products/filter_form}" method="get" id="filter">-->
+        <!--<input type="number" name="minCost" placeholder="минимальная цена">-->
+        <!--<input type="number" name="maxCost" placeholder="максимальная цена">-->
+        <!--<button type="submit">Показать</button>-->
+    <!--</form>-->
+
+</div>
+</body>
+</html>
