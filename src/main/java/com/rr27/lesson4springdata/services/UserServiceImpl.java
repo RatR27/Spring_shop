@@ -50,12 +50,12 @@ public class UserServiceImpl implements UserService {
         if (user == null){
             throw new UsernameNotFoundException("Неправильный логин или пароль");
         }
-        //так как от нас ждут не просто Лист, то ниже создаем метод
+        //преобразуем нашего пользователя к виду, который понимает SpringSecurity (имя, пароль, роль)
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 mapRolesToAuthorities(user.getRoles()));
     }
 
-    //из коллекции соберет новую коллекцию-наследник от Авторизации
+    //из наших ролей пользователя получаем SimpleGrantedAuthority понятный для Security загружая их туда
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }

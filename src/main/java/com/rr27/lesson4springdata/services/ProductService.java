@@ -31,16 +31,14 @@ public class ProductService {
         productRepository.save(product);
     }
 
-
     public Product findById(Long id){
         return productRepository.findById(id).get();
     }
-//
-//
-//    public List<Product> findAll(){
-//        return productRepository.findAll();
-//    }
-//
+
+    public List<Product> findAll(){
+        return productRepository.findAll();
+    }
+
 //    public List<Product> findAllOrderByASC(){
 //        return productRepository.findAllByOrderByCostAsc();
 //    }
