@@ -2,6 +2,7 @@ package com.rr27.lesson4springdata.entities;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -32,6 +33,9 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 
     public Long getId() {
         return id;

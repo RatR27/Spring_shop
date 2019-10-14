@@ -1,6 +1,8 @@
 package com.rr27.lesson4springdata.entities;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -55,5 +57,17 @@ public class Order {
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public Order(User user) {
+        this.user = user;
+        this.items = new ArrayList<>();
+        this.price = new Long(0);
+    }
+
+    public void addItem(OrderItem item) {
+        items.add(item);
+        item.setOrder(this);
+        price = price + item.getTotalPrice();
     }
 }
