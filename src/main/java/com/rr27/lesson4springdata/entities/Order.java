@@ -22,7 +22,7 @@ public class Order {
     private List<OrderItem> items;
 
     @Column(name = "price")
-    private Long price;
+    private BigDecimal price;
 
     public Order() {
     }
@@ -51,23 +51,23 @@ public class Order {
         this.items = items;
     }
 
-    public Long getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
     public Order(User user) {
         this.user = user;
         this.items = new ArrayList<>();
-        this.price = new Long(0);
+        this.price = new BigDecimal(0);
     }
 
     public void addItem(OrderItem item) {
         items.add(item);
         item.setOrder(this);
-        price = price + item.getTotalPrice();
+        price = price.add(item.getTotalPrice());
     }
 }

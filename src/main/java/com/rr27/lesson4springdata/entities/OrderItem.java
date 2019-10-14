@@ -1,6 +1,7 @@
 package com.rr27.lesson4springdata.entities;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "order_item")
@@ -26,10 +27,10 @@ public class OrderItem {
     private int quantity;
 
     @Column(name = "item_price")
-    private long itemPrice;
+    private BigDecimal itemPrice;
 
     @Column(name = "total_price")
-    private long totalPrice;
+    private BigDecimal totalPrice;
 
     public Long getId() {
         return id;
@@ -63,19 +64,19 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public long getItemPrice() {
+    public BigDecimal getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(long itemPrice) {
+    public void setItemPrice(BigDecimal itemPrice) {
         this.itemPrice = itemPrice;
     }
 
-    public long getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(long totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 }
