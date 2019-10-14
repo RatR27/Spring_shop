@@ -50,11 +50,6 @@ public class ShopController {
             pageSize = 5;
         }
 
-        //На странице products.html их напрямую обрабатываем, дергая из запроса
-//        model.addAttribute("word", word);
-//        model.addAttribute("min", min);
-//        model.addAttribute("max", max);
-
         model.addAttribute("pageNumber", pageNumber);
         model.addAttribute("filters", productFilter.getFiltersBuilder());
 
