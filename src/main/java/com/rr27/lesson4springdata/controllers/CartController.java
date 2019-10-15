@@ -30,7 +30,7 @@ public class CartController {
     //в модель добавили все продукты из списка
     @GetMapping("")
     public String show(Model model) {
-        model.addAttribute("products", cart.getProductList());
+        model.addAttribute("items", cart.getItems());
         return "cart";
     }
 

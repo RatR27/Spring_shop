@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="utf-8"/>
@@ -17,22 +17,27 @@
 
     <h3>Корзина</h3>
 
-    <table class="table table-hover">
+    <span th:if="${items.size()==0}"> Ваша крозина пуста!</span>
+
+    <table th:if="${items.size()>0}" class="table table-hover">
         <thead class="thead-dark">
         <tr>
-            <th>ID</th>
-            <th>Название</th>
+            <th>Название товара</th>
+            <th>Количество</th>
             <th>Цена</th>
         </tr>
         <tbody>
-        <tr th:each="product : ${products}">
-            <td th:text="${product.id}"/>
-            <td th:text="${product.title}"/>
-            <td th:text="${product.cost}"/>
+        <tr th:each="item : ${items}">
+            <td th:text="${item.product.title}"/>
+            <td th:text="${item.quantity"/>
+            <td th:text="${item.totalPrice}"/>
         </tr>
         </tbody>
     </table>
-
+    <!--Ссылка работает если корзина непуста и пользователь залогинен-->
+    <a th:if="${items.size()>0}" sec:authorize="isAuthenticated()" th:href="@{/orders/create}" class="btn btn-warning">Оформить заказ</a>
+    <!--Спан же, если пользователь неаунтефицирован-->
+    <span th:if="${items.size()>0}" sec:authorize="isAnonymous()">Для оформления заказа необходимо залогиниться</span>
 </div>
 </body>
 </html>

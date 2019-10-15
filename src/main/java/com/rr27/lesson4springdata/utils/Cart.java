@@ -47,7 +47,6 @@ public class Cart {
 //       OrderItem item = items.stream().filter(p -> p.getProduct().getId().equals(product.getId())).findFirst()
 //               .orElse(null);
 
-        //если уже добавляли товар такого вида. получим OI, иначе создаем новый OI
         OrderItem item = items.get(product.getId());
         if (item == null){
             item = new OrderItem();
@@ -69,7 +68,7 @@ public class Cart {
     //перерасчет стоимости oi при удалении товара и добавлении
     private void recalculate(){
         totalPrice = new BigDecimal(0);
-        items.values().stream().forEach(oi -> totalPrice.add(oi.getTotalPrice()));
+        items.values().stream().forEach(oi -> totalPrice = totalPrice.add(oi.getTotalPrice()));
     }
 
     public void clear(){
