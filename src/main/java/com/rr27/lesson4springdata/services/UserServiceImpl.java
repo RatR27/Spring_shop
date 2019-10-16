@@ -4,6 +4,7 @@ import com.rr27.lesson4springdata.entities.Role;
 import com.rr27.lesson4springdata.entities.User;
 import com.rr27.lesson4springdata.repositories.RoleRepository;
 import com.rr27.lesson4springdata.repositories.UserRepository;
+import com.rr27.lesson4springdata.utils.SystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -58,5 +60,23 @@ public class UserServiceImpl implements UserService {
     //из наших ролей пользователя получаем SimpleGrantedAuthority понятный для Security загружая их туда
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public User save(SystemUser systemUser){
+        User user = new User();
+
+        if(findByUserName(systemUser.getUsername()) != null){
+            throw new RuntimeException("Пользователь с логином " + systemUser.getUsername() +  " уже есть!");
+        }
+
+        user.setUsername(systemUser.getUsername());
+        user.setPassword(passwordEncoder.encode(systemUser.getPassword()));
+        user.setFirstName(systemUser.getFirstName());
+        user.setLastName(systemUser.getLastName());
+        user.setEmail(systemUser.getEmail());
+        user.setRoles(Arrays.asList(roleRepository.findOneByName("ROLE_CUSTOMER")));
+        return userRepository.save(user);
     }
 }

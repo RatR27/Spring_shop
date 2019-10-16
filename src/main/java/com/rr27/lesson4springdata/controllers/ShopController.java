@@ -33,35 +33,27 @@ public class ShopController {
      *
      */
     @RequestMapping()
-    public String shop(Model model, HttpServletRequest request, HttpServletResponse response, @CookieValue(value = "page_size", required = false) Integer pageSize,
-                       @RequestParam(name = "word", required = false) String word,
-                       @RequestParam(name = "min", required = false) Integer min,
-                       @RequestParam(name = "max", required = false)Integer max,
+    public String shop(Model model, HttpServletRequest request, HttpServletResponse response,
+                       @CookieValue(value = "page_size", required = false) Integer pageSize,
                        @RequestParam(name = "pageNumber", required = false) Integer pageNumber
 //                               @RequestParam(name = "pageSize", required = false) Integer pageSize
-    ){
-
+    ) {
         //выводит url с которого совершался последний переход
 //        System.out.println(request.getHeader("referer"));
 
         ProductFilter productFilter = new ProductFilter(request);
-
         if(pageNumber == null){
             pageNumber = 1;
         }
-        //добавить выпадающий список в фильтр формы с кол-вом э-тов на странице
+        //TODO! добавить выпадающий список в фильтр формы с кол-вом э-тов на странице
         if(pageSize == null){
             pageSize = 5;
             response.addCookie(new Cookie("page_size", String.valueOf(pageSize)));
         }
-
         model.addAttribute("pageNumber", pageNumber);
         model.addAttribute("filters", productFilter.getFiltersBuilder());
-
         Page<Product> page = productService.findAllByPagingAndFiltering(productFilter.getSpecification(), PageRequest.of(pageNumber-1, pageSize, Sort.Direction.ASC,"id"));
         model.addAttribute("page", page);
-
         return "shop";
     }
-
 }

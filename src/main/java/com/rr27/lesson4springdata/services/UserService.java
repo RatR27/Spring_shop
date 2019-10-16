@@ -1,6 +1,7 @@
 package com.rr27.lesson4springdata.services;
 
 import com.rr27.lesson4springdata.entities.User;
+import com.rr27.lesson4springdata.utils.SystemUser;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
@@ -8,4 +9,5 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 public interface UserService extends UserDetailsService {
     User findByUserName(String username);
+    User save(SystemUser systemUser);
 }

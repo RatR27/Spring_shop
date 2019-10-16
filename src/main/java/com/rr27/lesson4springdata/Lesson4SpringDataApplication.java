@@ -3,6 +3,10 @@ package com.rr27.lesson4springdata;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/** Особенности примера
+ * работа идет только с четками покупателей, админской части нет
+ *
+ */
 @SpringBootApplication
 public class Lesson4SpringDataApplication {
 
