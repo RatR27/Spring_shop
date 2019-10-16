@@ -19,11 +19,6 @@ import static org.springframework.web.context.WebApplicationContext.SCOPE_SESSIO
 @Component
 @Scope(value = SCOPE_SESSION, proxyMode = TARGET_CLASS)
 public class Cart {
-
-    //в будущем можно вренуться к варианту с листом и streamAPI
-//    private List<OrderItem> items;
-
-    //но пока для простоты HashMap
     //key (Long) - id продукта, по которму различаем OrderItem
     //value - OrderItem
     private Map<Long, OrderItem> items;
@@ -44,9 +39,6 @@ public class Cart {
     }
 
     public void addProduct(Product product){
-//       OrderItem item = items.stream().filter(p -> p.getProduct().getId().equals(product.getId())).findFirst()
-//               .orElse(null);
-
         OrderItem item = items.get(product.getId());
         if (item == null){
             item = new OrderItem();
