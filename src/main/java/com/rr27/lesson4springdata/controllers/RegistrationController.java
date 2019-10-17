@@ -24,6 +24,8 @@ public class RegistrationController {
         this.userService = userService;
     }
 
+    //дополнительный проверщик, убирающий пробелы из строки и проверяющий "сухой" остаток на длину
+    // ______ - это не notNul, НО длина тоже не равна 6 (шесть пробелов)
     @InitBinder
     public void initBinder(WebDataBinder webDataBinder){
         StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
