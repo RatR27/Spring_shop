@@ -19,15 +19,16 @@ public class OrderService {
     }
 
     @Autowired
-    public void setCart(Cart cart) {
+    public void setCart(OrderRepository orderRepository, Cart cart) {
+        this.orderRepository = orderRepository;
         this.cart = cart;
     }
 
-    public void createOrder(User user){
+    public Order createOrder(User user){
         Order order = new Order(user);
         cart.getItems().values().stream().forEach(i -> order.addItem(i));
         cart.clear();
-        orderRepository.save(order);
+        return orderRepository.save(order);
     }
 
 

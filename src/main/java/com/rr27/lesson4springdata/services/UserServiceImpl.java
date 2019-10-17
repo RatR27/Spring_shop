@@ -67,6 +67,8 @@ public class UserServiceImpl implements UserService {
     public User save(SystemUser systemUser){
         User user = new User();
 
+        //еще раз проверим, что пользователя с таким именем еще нет в базе
+        //хотя Исключение должно было вылететь еще раньше и сюда бы мы не дошли по хорошему
         if(findByUserName(systemUser.getUsername()) != null){
             throw new RuntimeException("Пользователь с логином " + systemUser.getUsername() +  " уже есть!");
         }
