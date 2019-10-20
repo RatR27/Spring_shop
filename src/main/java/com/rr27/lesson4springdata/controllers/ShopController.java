@@ -38,9 +38,6 @@ public class ShopController {
                        @RequestParam(name = "pageNumber", required = false) Integer pageNumber
 //                               @RequestParam(name = "pageSize", required = false) Integer pageSize
     ) {
-        //выводит url с которого совершался последний переход
-//        System.out.println(request.getHeader("referer"));
-
         ProductFilter productFilter = new ProductFilter(request);
         if(pageNumber == null){
             pageNumber = 1;

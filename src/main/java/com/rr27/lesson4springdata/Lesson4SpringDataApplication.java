@@ -12,6 +12,6 @@ public class Lesson4SpringDataApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Lesson4SpringDataApplication.class, args);
-	}
 
+	}
 }

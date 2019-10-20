@@ -42,6 +42,11 @@
         <tbody>
         <tr th:each="product : ${page.getContent()}">
             <td th:text="${product.id}"/>
+            <!-- Вставка картинки, но у меня их пока нет
+            <td>
+                <img class="table_image" th:src="@{'/image_repository/products/' + ${product.id} + '/img_1.jpg'}">
+            </td>
+            -->
             <td th:text="${product.title}"/>
             <td th:text="${product.cost}"/>
             <td>

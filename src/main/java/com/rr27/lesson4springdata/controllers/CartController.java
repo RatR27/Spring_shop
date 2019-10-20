@@ -31,17 +31,16 @@ public class CartController {
         this.productService = productService;
     }
 
-    //в модель добавили все продукты из списка
     @GetMapping("")
     public String show(Model model, HttpSession httpSession) {
         model.addAttribute("items", cart.getItems().values());
-        List list = Collections.list(httpSession.getAttributeNames());
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(httpSession.getAttribute("scopedTarget.cart"));
-        }
-        for (Field f: httpSession.getAttribute("scopedTarget.cart").getClass().getDeclaredFields()){
-            System.out.println(f.getName());
-        }
+//        List list = Collections.list(httpSession.getAttributeNames());
+//        for (int i = 0; i < list.size(); i++) {
+//            System.out.println(httpSession.getAttribute("scopedTarget.cart"));
+//        }
+//        for (Field f: httpSession.getAttribute("scopedTarget.cart").getClass().getDeclaredFields()){
+//            System.out.println(f.getName());
+//        }
         return "cart";
     }
 

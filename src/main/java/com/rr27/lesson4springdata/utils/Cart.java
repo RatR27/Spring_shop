@@ -40,6 +40,7 @@ public class Cart {
 
     public void addProduct(Product product){
         OrderItem item = items.get(product.getId());
+        //если в корзине товара такого типа - нет, то создаем его
         if (item == null){
             item = new OrderItem();
             item.setItemPrice(product.getCost());
