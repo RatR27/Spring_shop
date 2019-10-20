@@ -30,7 +30,7 @@ public class AppConfig implements WebMvcConfigurer {
 
     //установка языка - дефолт=рус
     @Bean
-    public LocaleResolver localResoler(){
+    public LocaleResolver localeResolver(){
         SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
         sessionLocaleResolver.setDefaultLocale(new Locale("ru"));
         return sessionLocaleResolver;

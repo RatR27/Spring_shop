@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * Данный сервис предназначен для вытаскивания инфы о пользователе по id
  */
 public interface UserService extends UserDetailsService {
-    User findByUserName(String username);
+    User findByPhone(String phone);
+    boolean isUserExist(String phone);
     User save(SystemUser systemUser);
 }

@@ -16,9 +16,9 @@ import javax.validation.constraints.Size;
 @FieldMatch(first = "password", second = "matchingPassword", message = "The password fields must match")
 public class SystemUser {
 
-    @NotNull(message = "Поле не может быть пустое")
-    @Size(min = 3, message = "Логин должен быть боьше 2 символов")
-    private String username;
+    @NotNull(message = "is required")
+    @Size(min = 8, message = "is required")
+    private String phone;
 
     @NotNull(message = "is required")
     @Size(min = 4, message = "Слишком короткий")
@@ -40,18 +40,6 @@ public class SystemUser {
     @Size(min = 4, message = "is required")
     @Email
     private String email;
-
-    @NotNull(message = "is required")
-    @Size(min = 8, message = "is required")
-    private String phone;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getPassword() {
         return password;

@@ -1,7 +1,9 @@
 package com.rr27.lesson4springdata.controllers;
 
 import com.rr27.lesson4springdata.entities.Product;
+import com.rr27.lesson4springdata.entities.User;
 import com.rr27.lesson4springdata.services.ProductService;
+import com.rr27.lesson4springdata.services.UserService;
 import com.rr27.lesson4springdata.utils.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,17 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.Collections;
-import java.util.List;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/cart")
 public class CartController {
 
     private ProductService productService;
+    private UserService userService;
 
     private Cart cart;
 
@@ -31,16 +31,21 @@ public class CartController {
         this.productService = productService;
     }
 
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    //Principal - это сущность из Spring Security - UserDetails, который мы настраивали для него
     @GetMapping("")
-    public String show(Model model, HttpSession httpSession) {
+    public String show(Model model, Principal principal) {
+        if (principal != null){
+            User user = userService.findByPhone(principal.getName());
+            model.addAttribute("phone", user.getPhone());
+            model.addAttribute("firstName", user.getFirstName());
+        }
         model.addAttribute("items", cart.getItems().values());
-//        List list = Collections.list(httpSession.getAttributeNames());
-//        for (int i = 0; i < list.size(); i++) {
-//            System.out.println(httpSession.getAttribute("scopedTarget.cart"));
-//        }
-//        for (Field f: httpSession.getAttribute("scopedTarget.cart").getClass().getDeclaredFields()){
-//            System.out.println(f.getName());
-//        }
+
         return "cart";
     }
 

@@ -37,10 +37,39 @@
         </tr>
         </tbody>
     </table>
+
     <!--Ссылка работает если корзина непуста и пользователь залогинен-->
-    <a th:if="${items.size()>0}" sec:authorize="isAuthenticated()" th:href="@{/orders/create}" class="btn btn-warning">Оформить заказ</a>
-    <!--Спан же, если пользователь неаунтефицирован-->
-    <span th:if="${items.size()>0}" sec:authorize="isAnonymous()">Для оформления заказа необходимо залогиниться</span>
+    <div th:if="${items.size()>0}" >
+        <form th:action="@{/orders/create}" method="GET" class="form-horizontal">
+            <h2>Форма оформления заказа</h2>
+
+            <div style="margin-bottom: 25px" class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input th:value="${phone != null} ? ${phone}" class="form-control" th:name="phone" type="text"
+                       th:placeholder="#{order.phone}">
+            </div>
+
+            <div style="margin-bottom: 25px" class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input th:value="${firstName != null} ? ${firstName}" class="form-control" th:name="firstName" type="text"
+                       th:placeholder="#{order.first.name}">
+            </div>
+
+            <div style="margin-bottom: 25px" class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input th:value="${address != null} ? ${address}" class="form-control" th:name="address" type="text"
+                       th:placeholder="#{order.address}">
+            </div>
+
+            <div style="margin-top: 10px" class="form-group">
+                <div class="col-sm-6 controls">
+                    <button type="submit" class="btn btn-warning">Оформить заказ</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
 </div>
 </body>
 </html>

@@ -43,12 +43,12 @@ public class RegistrationController {
     //в BindingResult улетают все ошибки допущенные при заполнении полей
     @PostMapping("/process")
     public String processRegistrationForm(@Valid @ModelAttribute("systemUser") SystemUser systemUser, BindingResult bindingResult, Model model) {
-        String username = systemUser.getUsername();
+        String phone = systemUser.getPhone();
         //если допущены ошибки, то возвращаемся к форме регистрации по-новой
         if (bindingResult.hasErrors()) {
             return "registration-form";
         }
-        User existing = userService.findByUserName(username);
+        User existing = userService.findByPhone(phone);
         //отлавливаем, что пользователь с таким логином уже есть
         if (existing != null) {
             // theSystemUser.setUserName(null);      //если не хотим ничего вбивать заново, кроме имени, то мы занулим только его

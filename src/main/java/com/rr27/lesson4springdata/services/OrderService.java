@@ -24,8 +24,8 @@ public class OrderService {
         this.cart = cart;
     }
 
-    public Order createOrder(User user){
-        Order order = new Order(user);
+    public Order createOrder(User user, String phone, String address){
+        Order order = new Order(user, phone, address);
         cart.getItems().values().stream().forEach(i -> order.addItem(i));
         cart.clear();
         return orderRepository.save(order);

@@ -41,19 +41,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User findByUserName(String username) {
-        return userRepository.findOneByUsername(username);
+    public User findByPhone(String phone) {
+        return userRepository.findOneByPhone(phone);
+    }
+
+    @Override
+    public boolean isUserExist(String phone) {
+        return userRepository.existByPhone(phone);
     }
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findOneByUsername(username);
+    public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
+        User user = userRepository.findOneByPhone(phone);
         if (user == null){
             throw new UsernameNotFoundException("Неправильный логин или пароль");
         }
         //преобразуем нашего пользователя к виду, который понимает SpringSecurity (имя, пароль, роль)
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+        return new org.springframework.security.core.userdetails.User(user.getPhone(), user.getPassword(),
                 mapRolesToAuthorities(user.getRoles()));
     }
 
@@ -69,16 +74,15 @@ public class UserServiceImpl implements UserService {
 
         //еще раз проверим, что пользователя с таким именем еще нет в базе
         //хотя Исключение должно было вылететь еще раньше и сюда бы мы не дошли по хорошему
-        if(findByUserName(systemUser.getUsername()) != null){
-            throw new RuntimeException("Пользователь с логином " + systemUser.getUsername() +  " уже есть!");
+        if(findByPhone(systemUser.getPhone()) != null){
+            throw new RuntimeException("Пользователь с таким номером телефона  " + systemUser.getPhone() +  " уже есть!");
         }
 
-        user.setUsername(systemUser.getUsername());
+        user.setPhone(systemUser.getPhone());
         user.setPassword(passwordEncoder.encode(systemUser.getPassword()));
         user.setFirstName(systemUser.getFirstName());
         user.setLastName(systemUser.getLastName());
         user.setEmail(systemUser.getEmail());
-        user.setPhone(systemUser.getPhone());
         user.setRoles(Arrays.asList(roleRepository.findOneByName("ROLE_CUSTOMER")));
         return userRepository.save(user);
     }

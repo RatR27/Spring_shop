@@ -2,6 +2,7 @@ package com.rr27.lesson4springdata.entities;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "product")
@@ -17,6 +18,9 @@ public class Product {
 
     @Column(name = "cost")
     private BigDecimal cost;
+
+    @OneToMany(mappedBy = "product")
+    private List<ProductImage> images;
 
     public Long getId() {
         return id;
@@ -40,6 +44,14 @@ public class Product {
 
     public void setCost(BigDecimal cost) {
         this.cost = cost;
+    }
+
+    public List<ProductImage> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ProductImage> images) {
+        this.images = images;
     }
 
     public Product() {
