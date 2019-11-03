@@ -60,7 +60,9 @@ public class OrderController {
             }
         }
         Order order = orderService.createOrder(user, phone, address);
-        mailService.sendOrderMail(order);
+        if (user.getEmail() != null){
+            mailService.sendOrderMail(order);
+        }
         return "redirect/:shop";
     }
 
