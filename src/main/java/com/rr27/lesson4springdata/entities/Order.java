@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name = "order")
 public class Order {
     public enum Status{
-        CREATED, SENT, RECEIVED, CANCELED
+        CREATED, PAID, SENT, RECEIVED, CANCELED
     }
 
     @Id
@@ -128,6 +128,7 @@ public class Order {
         this.user = user;
         this.phone = phone;
         this.address = address;
+        this.status = Status.CREATED;
         this.items = new ArrayList<>();
         this.price = new BigDecimal(0);
     }
