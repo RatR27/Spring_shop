@@ -22,7 +22,7 @@ public class CartTest {
         for (int i = 0; i < 5; i++) {
             Product product = new Product();
             product.setId(new Long(i + 1));
-            product.setCost(new BigDecimal(100 + i * 10));
+            product.setPrice(new BigDecimal(100 + i * 10));
             product.setTitle("Product #" + i);
             cart.addProduct(product);
         }

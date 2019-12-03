@@ -16,8 +16,8 @@ public class Product {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "cost")
-    private BigDecimal cost;
+    @Column(name = "price")
+    private BigDecimal price;
 
     @OneToMany(mappedBy = "product")
     private List<ProductImage> images;
@@ -38,12 +38,12 @@ public class Product {
         this.title = title;
     }
 
-    public BigDecimal getCost() {
-        return cost;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public List<ProductImage> getImages() {
@@ -57,9 +57,9 @@ public class Product {
     public Product() {
     }
 
-    public Product(String title, BigDecimal cost) {
+    public Product(String title, BigDecimal price) {
         this.title = title;
-        this.cost = cost;
+        this.price = price;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", cost=" + cost +
+                ", price=" + price +
                 '}';
     }
 }

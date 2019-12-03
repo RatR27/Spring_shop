@@ -59,7 +59,7 @@
                 <img class="table_image" th:src="@{'/image_repository/products/' + ${product.id} + '/img_1.jpg'}">
             </td>
             <td th:text="${product.title}"/>
-            <td th:text="${product.cost}"/>
+            <td th:text="${product.price}"/>
             <td>
                 <a class="btn btn-primary" th:href="@{'/cart/add?id=' + ${product.id}}">Add to cart</a>
             </td>

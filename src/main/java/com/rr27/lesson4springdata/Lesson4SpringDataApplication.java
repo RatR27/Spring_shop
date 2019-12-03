@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /** Особенности примера
- * работа идет только с четками покупателей, админской части нет
+ * работа идет только с учетками покупателей, админской части нет
  *
  */
 @SpringBootApplication

@@ -3,14 +3,11 @@ package com.rr27.lesson4springdata.utils;
 import com.rr27.lesson4springdata.entities.OrderItem;
 import com.rr27.lesson4springdata.entities.Product;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.springframework.context.annotation.ScopedProxyMode.TARGET_CLASS;
@@ -43,7 +40,7 @@ public class Cart {
         //если в корзине товара такого типа - нет, то создаем его
         if (item == null){
             item = new OrderItem();
-            item.setItemPrice(product.getCost());
+            item.setItemPrice(product.getPrice());
             item.setProduct(product);
             item.setQuantity(0);
         }
