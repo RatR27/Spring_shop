@@ -46,11 +46,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isUserExist(String phone) {
-        return userRepository.existByPhone(phone);
-    }
-
-    @Override
     @Transactional
     public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
         User user = userRepository.findOneByPhone(phone);
@@ -65,6 +60,11 @@ public class UserServiceImpl implements UserService {
     //из наших ролей пользователя получаем SimpleGrantedAuthority понятный для Security загружая их туда
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean isUserExist(String phone) {
+        return userRepository.existsByPhone(phone);
     }
 
     @Override

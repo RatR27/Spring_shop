@@ -68,8 +68,8 @@ CREATE TABLE order_items (id bigserial PRIMARY KEY, order_id bigint, product_id 
 total_price numeric(8, 2), FOREIGN KEY (order_id) REFERENCES orders(id), FOREIGN KEY (product_id) REFERENCES products(id));
 
 DROP TABLE IF EXISTS products_images;
-CREATE TABLE products_images (id bigserial PRIMARY KEY, product_id bigint, path varchar(255), FOREIGN KEY (product_id) REFERENCES products(id));
-INSERT INTO products_images (product_id, path) VALUES
-(1, 'img_1.jpg'),
-(2, 'img_1.jpg'),
-(3, 'img_1.jpg');
+--CREATE TABLE products_images (id bigserial PRIMARY KEY, product_id bigint, path varchar(255), FOREIGN KEY (product_id) REFERENCES products(id));
+--INSERT INTO products_images (product_id, path) VALUES
+--(1, 'img_1.jpg'),
+--(2, 'img_1.jpg'),
+--(3, 'img_1.jpg');

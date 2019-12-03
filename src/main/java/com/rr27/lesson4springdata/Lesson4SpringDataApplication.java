@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * работа идет только с учетками покупателей, админской части нет
  *
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.rr27.lesson4springdata"})
 public class Lesson4SpringDataApplication {
 
 	public static void main(String[] args) {

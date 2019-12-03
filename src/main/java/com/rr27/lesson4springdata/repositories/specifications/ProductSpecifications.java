@@ -9,15 +9,15 @@ public class ProductSpecifications {
         return (Specification<Product>) (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.get("title"), "%" + word + "%");
     }
 
-    public static Specification<Product> costGreaterThanOrEq(double value) {
+    public static Specification<Product> priceGreaterThanOrEq(double value) {
         return (Specification<Product>) (root, criteriaQuery, criteriaBuilder) -> {
-            return criteriaBuilder.greaterThanOrEqualTo(root.get("cost"), value);
+            return criteriaBuilder.greaterThanOrEqualTo(root.get("price"), value);
         };
     }
 
-    public static Specification<Product> costLesserThanOrEq(double value) {
+    public static Specification<Product> priceLesserThanOrEq(double value) {
         return (Specification<Product>) (root, criteriaQuery, criteriaBuilder) -> {
-            return criteriaBuilder.lessThanOrEqualTo(root.get("cost"), value);
+            return criteriaBuilder.lessThanOrEqualTo(root.get("price"), value);
         };
     }
 }

@@ -29,12 +29,12 @@ public class ProductFilter {
         }
 
         if (request.getParameter("min") != null && !request.getParameter("min").isEmpty()){
-            specification = specification.and(ProductSpecifications.costGreaterThanOrEq(Integer.parseInt(request.getParameter("min"))));
+            specification = specification.and(ProductSpecifications.priceGreaterThanOrEq(Integer.parseInt(request.getParameter("min"))));
             filtersBuilder.append("&min="+request.getParameter("min"));
         }
 
         if (request.getParameter("max") != null && !request.getParameter("max").isEmpty()){
-            specification = specification.and(ProductSpecifications.costLesserThanOrEq(Integer.parseInt(request.getParameter("max"))));
+            specification = specification.and(ProductSpecifications.priceLesserThanOrEq(Integer.parseInt(request.getParameter("max"))));
             filtersBuilder.append("&max="+request.getParameter("max"));
         }
     }

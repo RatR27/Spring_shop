@@ -15,21 +15,21 @@ import java.util.List;
 public interface ProductRepository extends PagingAndSortingRepository<Product, Long>, JpaSpecificationExecutor<Product> {
 
     //поиск записи по id
-    Product findOneById(Long id);
+//    Product findOneById(Long id);
 
     //вывести все записи БД
     List<Product> findAll();
 
-    List<Product> findAllByOrderByCostAsc();
-
-    List<Product> findAllByOrderByCostDesc();
-
-    Product getFirstAllByOrderByCostAsc();
-
-    Product getFirstAllByOrderByCostDesc();
+//    List<Product> findAllByOrderByCostAsc();
+//
+//    List<Product> findAllByOrderByCostDesc();
+//
+//    Product getFirstAllByOrderByCostAsc();
+//
+//    Product getFirstAllByOrderByCostDesc();
 
     //поиск от мин до макс значения
-    List<Product> findAllByCostBetween(int min, int max);
+//    List<Product> findAllByCostBetween(int min, int max);
 
     //пагинация
     Page<Product> findAll(Pageable pageable);
@@ -43,8 +43,8 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, L
     //очистка таблицы в БД
     void deleteAll();
 
-    Product findByTitleIs(String title);
+//    Product findByTitleIs(String title);
 
-    List<Product> findByCostLessThan(int cost);
+//    List<Product> findByCostLessThan(int cost);
 
 }

@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Long> {
     User findOneByPhone(String phone);
-    boolean existByPhone(String phone);
+    boolean existsByPhone(String phone);
 }
