@@ -12,6 +12,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 
+<!--
+    в навигацию вшиваем activeTab - подсвечивает ту страницу, на которой мы сейчас находимся
+    th:classappend="${activeTab == 'Home' ? 'active' : ''}"
+
+    дальше этот блок будем вшивать в нужные нам страницы через replace
+    имя html :: имя фрагмента(аргумент)
+     <div th:replace="~{navigation::navigation(Shop)}" />
+-->
 <div th:fragment="navigation(activeTab)">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarNav">

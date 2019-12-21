@@ -25,7 +25,6 @@ public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Obje
      * - появляется текст ошибки, то что передаем в аннотацию
      * - текст ошибки привязывается к полю, в данном случае это поле первичного паролю
      */
-
     @Override
     public boolean isValid(final Object value, final ConstraintValidatorContext context) {
         boolean valid = true;

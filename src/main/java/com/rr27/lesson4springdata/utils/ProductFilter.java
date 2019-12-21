@@ -6,6 +6,9 @@ import org.springframework.data.jpa.domain.Specification;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Класс обертка над Criteria API для более удобного использования фильтра и возможности сохранять параметры запроса при фильтрации
+ */
 public class ProductFilter {
 
     private Specification<Product> specification;

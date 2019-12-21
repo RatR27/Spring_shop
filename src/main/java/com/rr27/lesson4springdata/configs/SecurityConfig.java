@@ -59,7 +59,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    //если конектимся, то наш юзер существует в базе
+    //бин для аутентификации пользователя, который закинем в configure
+    //раз используем dao считаем что наш пользователь живет в БД
+    //можно еще сделать inMemoryAP - где логин пароль хранится в списке в памяти и проверяется оттуда
     @Bean
     public DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
