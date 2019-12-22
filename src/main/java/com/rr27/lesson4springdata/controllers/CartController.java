@@ -27,6 +27,11 @@ public class CartController {
     private Cart cart;
 
     @Autowired
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    @Autowired
     public void setProductService(ProductService productService) {
         this.productService = productService;
     }

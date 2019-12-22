@@ -26,6 +26,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
+        //пример inMemoryAuthentication()
+        //noop - пароль в явном виде, bcrypt - заскриптованный хэш
+//        auth.inMemoryAuthentication()
+//                .withUser(user.username("*").password("{noop}*").roles("*"))
+//                .withUser(user.username("*").password("{bcrypt}*").roles("*"));
+
     }
 
     /** модуль настроек приложения
@@ -61,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //бин для аутентификации пользователя, который закинем в configure
     //раз используем dao считаем что наш пользователь живет в БД
-    //можно еще сделать inMemoryAP - где логин пароль хранится в списке в памяти и проверяется оттуда
+    //можно еще сделать inMemoryAP - где логин-пароль хранится в списке в памяти и проверяется оттуда
     @Bean
     public DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
