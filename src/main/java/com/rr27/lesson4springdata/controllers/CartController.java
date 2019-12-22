@@ -56,11 +56,15 @@ public class CartController {
 
     //метод перенаправит нас на ту страницу откуда мы постучали в него
     //а это страница - /shop у нас, тем самым мы не будем покидать каждый раз каталог
+    //можно заменить Get на Post -> но для этого либо нужна форма собирающая тело Post запроса
+    //либо вшивать js код, например Ajax и тогда не надо будет редиректить страницу
     @GetMapping("/add")
     public void addProductToCart(@RequestParam(name = "id") Long id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         Product product = productService.findById(id);
         cart.addProduct(product);
         response.sendRedirect(request.getHeader("referer"));
     }
+
+    //TODO добавить удаления OrderItem + уменьшение числа товаров с пересчетом
 
 }

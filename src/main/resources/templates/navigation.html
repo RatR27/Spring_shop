@@ -50,9 +50,9 @@
                 <li sec:authorize="isAnonymous()" class="nav-item">
                     <form class="align-middle" th:action="@{/authenticateTheUser}" method="POST">
                         <div class="input-group-prepend">
-                            <input class="form-control" type="text" placeholder="#{nav.login.field}" name="username"
+                            <input class="form-control" type="text" th:placeholder="#{nav.login.field}" name="username"
                                    aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
-                            <input class="form-control" type="text" placeholder="#{nav.password}" name="password"
+                            <input class="form-control" type="text" th:placeholder="#{nav.password}" name="password"
                                    aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
                             <button class="btn btn-primary btn-sm" style="margin-left: 10px;" type="submit" th:text="#{nav.login.submit}"></button>
                             <a th:href="@{/register/}" class="btn btn-primary btn-sm" style="margin-left: 10px;" th:text="#{nav.register}"></a>
